@@ -1,0 +1,1 @@
+import{Schema,model}from'mongoose';const schema=new Schema({_id:String,en:String,ar:String,enabled:{type:Boolean,default:true},sortOrder:Number},{timestamps:true});export const Prompt=model('Prompt',schema);

@@ -1,0 +1,5 @@
+import dotenv from'dotenv';import{fileURLToPath}from'url';import{z}from'zod';
+// Local preview clients may use either localhost or 127.0.0.1.
+dotenv.config({path:fileURLToPath(new URL('../../../.env',import.meta.url)),quiet:true});
+dotenv.config({quiet:true});
+const schema=z.object({NODE_ENV:z.enum(['development','test','production']).default('development'),HOST:z.string().default('127.0.0.1'),PORT:z.coerce.number().default(4000),MONGODB_URI:z.string().default('mongodb://127.0.0.1:27017/mansour-living-wall'),JWT_SECRET:z.string().min(16).default('development-secret-change-me'),ADMIN_EMAIL:z.string().email().default('admin@example.com'),ADMIN_PASSWORD:z.string().min(8).default('change-this-password'),OPENAI_API_KEY:z.string().optional(),OPENAI_MODEL:z.string().default('gpt-4.1-mini'),CORS_ORIGINS:z.string().default('http://localhost:5173,http://localhost:5174,http://localhost:5175'),IP_HASH_SALT:z.string().default('development-ip-salt'),DEMO_MODE:z.string().default('false')});export const env=schema.parse(process.env);

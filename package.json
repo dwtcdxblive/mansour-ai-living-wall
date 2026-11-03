@@ -1,0 +1,14 @@
+{
+  "name": "mansour-ai-living-wall",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "concurrently -n api,visitor,display,admin -c magenta,cyan,yellow,blue \"npm run dev -w @mansour/api\" \"npm run dev -w @mansour/visitor\" \"npm run dev -w @mansour/display\" \"npm run dev -w @mansour/admin\"",
+    "build": "npm run build -w @mansour/shared && npm run build -w @mansour/visitor && npm run build -w @mansour/display && npm run build -w @mansour/admin && npm run build -w @mansour/api",
+    "seed": "npm run seed -w @mansour/api",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {"concurrently": "^9.2.1", "typescript": "^5.9.2"},
+  "engines": {"node": ">=20"}
+}

@@ -1,0 +1,3 @@
+const base=import.meta.env.VITE_API_URL||'http://localhost:4000/api';
+async function call<T>(path:string,options?:RequestInit):Promise<T>{const r=await fetch(`${base}${path}`,{...options,headers:{'Content-Type':'application/json',...(options?.headers||{})}});if(!r.ok)throw new Error((await r.json().catch(()=>({}))).message||'Request failed');return r.json()}
+export const api={stats:()=>call<{total:number}>('/public/stats'),event:(body:unknown)=>call('/events',{method:'POST',body:JSON.stringify(body)}),generate:(body:unknown)=>call<{generatedMessage:string}>('/ai/generate',{method:'POST',body:JSON.stringify(body)}),submit:(body:unknown)=>call<{submission:{stickyNumber:number;status:string}} >('/submissions',{method:'POST',body:JSON.stringify(body)})};

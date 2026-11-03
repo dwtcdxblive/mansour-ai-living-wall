@@ -1,0 +1,1 @@
+import type{Server}from'socket.io';let io:Server;export function setIO(server:Server){io=server}export function emit(event:string,payload?:unknown){io?.to('displays').emit(event,payload)}export function emitAdmins(event:string,payload?:unknown){io?.to('admins').emit(event,payload)}

@@ -1,0 +1,1 @@
+import type{RequestHandler}from'express';import jwt from'jsonwebtoken';import{env}from'../config.js';export const requireAdmin:RequestHandler=(req,res,next)=>{const token=req.headers.authorization?.replace('Bearer ','')||(req.query.token as string);try{jwt.verify(token||'',env.JWT_SECRET);next()}catch{res.status(401).json({message:'Unauthorized'})}};

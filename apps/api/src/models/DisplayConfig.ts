@@ -1,0 +1,1 @@
+import{Schema,model}from'mongoose';import{defaultDisplaySettings}from'@mansour/shared';const schema=new Schema({_id:{type:String,default:'main'},...Object.fromEntries(Object.entries(defaultDisplaySettings).map(([k,v])=>[k,{type:typeof v=== 'boolean'?Boolean:Number,default:v}]))},{timestamps:true});export const DisplayConfig=model('DisplayConfig',schema);
